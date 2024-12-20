@@ -3,406 +3,195 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Dashboard</title>
+  <title>Patients</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Optional: Smooth transition for the sidebar */
-    .sidebar-transition {
-      transition: transform 0.3s ease-in-out;
+    /* Optional: Add custom styles if needed */
+    .patients-table-container {
+      padding: 20px;
+    }
+    .patients-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .patients-table th,
+    .patients-table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    .patients-table th {
+      background-color: #f4f4f4;
+    }
+    .patients-table-action-btn {
+      cursor: pointer;
+    }
+    .patients-table-status {
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+    .patients-table-status.none {
+      background-color: #f44336;
+      color: white;
+    }
+    .patients-table-viewed-icon {
+      cursor: pointer;
     }
   </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
-  <div class="flex h-screen">
-    <!-- Sidebar -->
-    <aside 
-      id="sidebar" 
-      class="fixed inset-y-0 left-0 w-64 bg-blue-800 text-white transform -translate-x-full lg:translate-x-0 sidebar-transition z-50 lg:relative lg:flex lg:flex-col"
-    >
-      <!-- Close Icon (Visible on Tablet and Smaller Screens) -->
-      <div class="p-4 flex items-center justify-between border-b border-blue-700">
-        <h1 class="text-2xl font-bold">My Dashboard</h1>
-        <button 
-          id="close-btn" 
-          class="block lg:hidden text-white focus:outline-none focus:ring focus:ring-blue-300"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
+  <!-- Sidebar -->
+  <aside class="fixed inset-y-0 left-0 w-64 bg-blue-800 text-white p-4">
+    <h1 class="text-2xl font-bold">My Dashboard</h1>
+    <nav class="mt-8">
+      <a href="#" class="block p-2 text-white hover:bg-blue-700">Dashboard</a>
+      <a href="patient.html" class="block p-2 text-white hover:bg-blue-700">Patients</a>
+    </nav>
+  </aside>
 
-      <!-- Menu Items -->
-      <nav class="flex-1 p-4 space-y-4">
-        <a href="#" class="flex items-center gap-4 p-2 rounded hover:bg-blue-700">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h11M9 21V3m-6 7h18" />
-          </svg>
-          <span>Dashboard</span>
-        </a>
-        <a href="#" class="flex items-center gap-4 p-2 rounded hover:bg-blue-700">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c1.104 0 2-.896 2-2s-.896-2-2-2-2 .896-2 2 .896 2 2 2zm-4 8h8m-4-4v-1c0-2.2 3-3 3-3m-6 0s3 .8 3 3v1" />
-          </svg>
-          <span>Settings</span>
-        </a>
-        <a href="#" class="flex items-center gap-4 p-2 rounded hover:bg-blue-700">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7" />
-          </svg>
-          <span>Logout</span>
-        </a>
-        <a href="#" class="flex items-center gap-4 p-2 rounded hover:bg-blue-700">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20l-7-4-7 4V5a2 2 0 012-2h10a2 2 0 012 2z" />
-          </svg>
-          <span>Patient</span>
-        </a>
-      </nav>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="flex-1 flex flex-col">
-      <!-- Navbar -->
-      <header class="bg-white shadow p-4 flex justify-between items-center">
-        <h2 class="text-xl font-semibold text-red-700 animate-bounce">M</h2>
-        <div class="flex items-center gap-4">
-          <!-- Hamburger Menu -->
-          <button 
-            id="menu-btn" 
-            class="block lg:hidden text-gray-600 focus:outline-none focus:ring focus:ring-blue-300"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-          <input 
-            type="text" 
-            placeholder="Search..." 
-            class="border rounded p-2 focus:outline-none focus:ring focus:ring-blue-300 hidden md:block"
-          />
-          <button class="bg-blue-800 text-white px-4 py-2 rounded hover:bg-blue-700">Profile</button>
-        </div>
-      </header>
-
-      <!-- Content Section -->
-      <section class="flex-1 p-2 bg-gray-100">
-        
-      
-       <!-- Main Content -->
-       <main class=" p-8">
-        <h2 class="text-2xl font-bold mb-4">Patients Table</h2>
-
-        <div class="grid grid-cols-12 gap-8 ">
-            <div class="col-span-4">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <div class="flex items-center">
-                        <div class="w-24 h-24 rounded-full overflow-hidden mr-4">
-                            <img src="/assets/images/profileedit.png" alt="Profile Picture"
-                                class="w-full h-full object-cover" />
-                        </div>
-                        <div>
-                            <h2 class="text-xl font-semibold">Tanzir Rahman</h2>
-                            <p class="text-gray-600">Gender: Male</p>
-                            <p class="text-gray-600">Age: 30</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-lg shadow-md mt-6">
-                    <h2 class="text-xl font-semibold">Assigned Doctor</h2>
-                    <p class="text-gray-600">Dr.Maneer</p>
-                </div>
-
-                <div class="bg-white p-6 rounded-lg shadow-md mt-6">
-                    <h2 class="text-xl font-semibold">Notes</h2>
-                    <p class="text-gray-600">Knee Pain, Headache</p>
-                </div>
-            </div>
-
-            <div class="col-span-8">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <p class="text-xl font-semibold">Patient's Studies</p>
-                    <form class="mt-4">
-                        <div class="grid grid-cols-2 gap-6">
-                            <div class="form-group">
-                                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                                <input type="text" id="name" name="name" placeholder="Enter patient's name"
-                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="id" class="block text-sm font-medium text-gray-700">ID</label>
-                                <input type="text" id="id" name="id" placeholder="Enter patient's ID"
-                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-6 mt-4">
-                            <div class="form-group">
-                                <label class="block text-sm font-medium text-gray-700">Gender</label>
-                                <div class="mt-2 flex space-x-4">
-                                    <label class="flex items-center">
-                                        <input type="radio" name="gender" value="male" class="mr-2" required />
-                                        Male
-                                    </label>
-                                    <label class="flex items-center">
-                                        <input type="radio" name="gender" value="female" class="mr-2" required />
-                                        Female
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="dob" class="block text-sm font-medium text-gray-700">Date of Birth</label>
-                                <input type="date" id="dob" name="dob"
-                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-6 mt-4">
-                            <div class="form-group">
-                                <label for="cell" class="block text-sm font-medium text-gray-700">Cell Phone</label>
-                                <input type="tel" id="cell" name="cell" placeholder="Enter cell phone number"
-                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="notes" class="block text-sm font-medium text-gray-700">Notes</label>
-                                <textarea id="notes" name="notes" rows="1" placeholder="Enter additional notes"
-                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></textarea>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="bg-white p-6 rounded-lg shadow-md mt-8">
-                    <p class="text-xl font-semibold">Study Information</p>
-                    <form class="mt-4">
-                        <div class="grid grid-cols-2 gap-6">
-                            <div class="form-group">
-                                <label for="procedure_name" class="block text-sm font-medium text-gray-700">Procedure
-                                    Name</label>
-                                <div class="relative">
-                                    <input type="text" id="procedure_name" name="procedure_name"
-                                        placeholder="Enter procedure name"
-                                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
-                                    <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
-                                            <path
-                                                d="M7.9987 14.6668C4.3168 14.6668 1.33203 11.682 1.33203 8.00016C1.33203 4.31826 4.3168 1.3335 7.9987 1.3335C11.6806 1.3335 14.6654 4.31826 14.6654 8.00016C14.6654 11.682 11.6806 14.6668 7.9987 14.6668ZM7.33203 7.3335H4.66536V8.66683H7.33203V11.3335H8.66536V8.66683H11.332V7.3335H8.66536V4.66683H7.33203V7.3335Z"
-                                                fill="#B3B3B3" />
-                                        </svg>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="study_id" class="block text-sm font-medium text-gray-700">Study ID</label>
-                                <input type="text" id="study_id" name="study_id" placeholder="Enter patient's ID"
-                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-6 mt-4">
-                            <div class="form-group">
-                                <label for="study_description" class="block text-sm font-medium text-gray-700">Study
-                                    Description</label>
-                                <textarea id="study_description" name="study_description" rows="1"
-                                    placeholder="Enter study description"
-                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="study_date" class="block text-sm font-medium text-gray-700">Study
-                                    Date</label>
-                                <input type="date" id="study_date" name="study_date"
-                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-6 mt-4">
-                            <div class="form-group">
-                                <label for="ref_physician" class="block text-sm font-medium text-gray-700">Ref.
-                                    Physician</label>
-                                <input type="text" id="ref_physician" name="ref_physician"
-                                    placeholder="Enter referring physician"
-                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="radiologist"
-                                    class="block text-sm font-medium text-gray-700">Radiologist</label>
-                                <input type="text" id="radiologist" name="radiologist"
-                                    placeholder="Enter radiologist name"
-                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-6 mt-4">
-                            <div class="form-group">
-                                <label for="radiologist_group"
-                                    class="block text-sm font-medium text-gray-700">Radiologist Group</label>
-                                <select id="radiologist_group" name="radiologist_group"
-                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
-                                    <option value="">Select Group</option>
-                                    <option value="group1">Group 1</option>
-                                    <option value="group2">Group 2</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="comment" class="block text-sm font-medium text-gray-700">Comment</label>
-                                <textarea id="comment" name="comment" rows="1" placeholder="Enter additional notes"
-                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-6 mt-4">
-                            <div class="form-group">
-                                <label for="institution_name"
-                                    class="block text-sm font-medium text-gray-700">Institution Name</label>
-                                <select id="institution_name" name="institution_name"
-                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
-                                    <option value="">Select Institution</option>
-                                    <option value="institution1">Institution 1</option>
-                                    <option value="institution2">Institution 2</option>
-                                </select>
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
-                <!-- Button Container -->
-                <div class="flex space-x-4 mt-5 justify-end">
-                    <button id="saveBtn"
-                        class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                        Save
-                    </button>
-                    <button
-                        class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400">
-                        Close
-                    </button>
-                </div>
-
-            </div>
-        </div>
+  <!-- Main Content -->
+  <main class="ml-64 p-8">
+    <h2 class="text-2xl font-bold mb-4">Patients Table</h2>
+    <div class="patients-table-container overflow-x-auto">
+      <table class="patients-table min-w-full">
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>#</th>
+            <th>Name</th>
+            <th>Study Date</th>
+            <th>Patient ID</th>
+            <th>Report Status</th>
+            <th>Modality</th>
+            <th>Comment</th>
+            <th>Viewed</th>
+            <th>Branch</th>
+            <th>Image</th>
+            <th>Gender</th>
+            <th>Series</th>
+            <th>Ref. Physician</th>
+            <th>Institution</th>
+            <th>Radiologist Group</th>
+            <th>Procedure</th>
+            <th>Other Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="patients-table-action-btn" id="dropdown-button">
+                <svg xmlns="http://www.w3.org/2000/svg"  width="25" height="24" viewBox="0 0 25 24" fill="none">
+                  <path d="M12.333 13C12.8853 13 13.333 12.5523 13.333 12C13.333 11.4477 12.8853 11 12.333 11C11.7807 11 11.333 11.4477 11.333 12C11.333 12.5523 11.7807 13 12.333 13Z" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M12.333 6C12.8853 6 13.333 5.55228 13.333 5C13.333 4.44772 12.8853 4 12.333 4C11.7807 4 11.333 4.44772 11.333 5C11.333 5.55228 11.7807 6 12.333 6Z" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M12.333 20C12.8853 20 13.333 19.5523 13.333 19C13.333 18.4477 12.8853 18 12.333 18C11.7807 18 11.333 18.4477 11.333 19C11.333 19.5523 11.7807 20 12.333 20Z" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </td>
+            <td>01</td>
+            <td>John Deo</td>
+            <td>2024-07-15</td>
+            <td>MC1134</td>
+            <td class="patients-table-status none">None</td>
+            <td>BMD</td>
+            <td>Checked</td>
+            <td>
+              <span class="patients-table-viewed-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
+                  <path d="M12.1668 3C17.5589 3 22.0449 6.87976 22.9854 12C22.0449 17.1202 17.5589 21 12.1668 21C6.77463 21 2.28865 17.1202 1.34814 12C2.28865 6.87976 6.77463 3 12.1668 3ZM12.1668 19C16.4024 19 20.0268 16.052 20.9442 12C20.0268 7.94803 16.4024 5 12.1668 5C7.93111 5 4.30672 7.94803 3.38928 12C4.30672 16.052 7.93111 19 12.1668 19ZM12.1668 16.5C9.68149 16.5 7.66676 14.4853 7.66676 12C7.66676 9.51472 9.68149 7.5 12.1668 7.5C14.652 7.5 16.6668 9.51472 16.6668 12C16.6668 14.4853 14.652 16.5 12.1668 16.5ZM12.1668 14.5C13.5475 14.5 14.6668 13.3807 14.6668 12C14.6668 10.6193 13.5475 9.5 12.1668 9.5C10.7861 9.5 9.66677 10.6193 9.66677 12C9.66677 13.3807 10.7861 14.5 12.1668 14.5Z" fill="#666666"/>
+                </svg>
+              </span>
+            </td>
+            <td>2024-07-15</td>
+            <td>9</td>
+            <td>Male</td>
+          </tr>
+          <!-- Add more rows as needed -->
+        </tbody>
+      </table>
 
 
-        <!-- First Modal (Save Changes) -->
-        <div id="actionModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-            <div class="bg-white rounded-lg shadow-lg w-96 p-6">
-                <div class="flex justify-between items-center">
-                    <button id="closeModal" class="text-gray-600 hover:text-gray-800">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
-                            <path d="M15 9L9 15" stroke="#666" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M9 9L15 15" stroke="#666" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="text-center ">
-                    <h2 class="text-xl font-semibold">Save Changes?</h2>
-                    <p class="text-gray-600">Are you sure you want to save these changes?</p>
-                    <div class="mt-4 flex justify-center space-x-4">
-                        <button id="cancelModal" class="bg-gray-300 text-gray-700 py-2 px-4 rounded hover:bg-gray-400">
-                            Cancel
-                        </button>
-                        <button id="confirmModal" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
-                            Save
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Second Modal (Success) -->
-        <div id="successModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-            <div class="bg-white rounded-lg shadow-lg w-96 p-6">
-                <div class="flex justify-between items-center">
-                    <button id="closeSuccessModal" class="text-gray-600 hover:text-gray-800">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
-                            <path d="M15 9L9 15" stroke="#666" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M9 9L15 15" stroke="#666" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" class="mx-auto mb-4">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M15 27.5C21.9036 27.5 27.5 21.9036 27.5 15C27.5 8.09644 21.9036 2.5 15 2.5C8.09644 2.5 2.5 8.09644 2.5 15C2.5 21.9036 8.09644 27.5 15 27.5ZM20.9603 12.0502C21.4022 11.5199 21.3306 10.7317 20.8002 10.2897C20.2699 9.84776 19.4817 9.91942 19.0397 10.4498L13.666 16.8982L10.8839 14.1161C10.3957 13.628 9.60427 13.628 9.11612 14.1161C8.62796 14.6043 8.62796 15.3957 9.11612 15.8839L12.6241 19.3919C13.2738 20.0416 14.3411 19.9932 14.9293 19.2873L20.9603 12.0502Z"
-                            fill="#17AF17" />
-                    </svg>
-                    <h2 class="text-xl font-semibold">Saved!</h2>
-                    <p class="text-gray-600">You have successfully saved all new changes.</p>
-                    <div class="mt-4 flex justify-center">
-                        <button id="closeSuccessConfirm"
-                            class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
-                            OK
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        </div>
-    </main>
-      </section>
-    </main>
+      <!-- Dropdown Menu Structure -->
+<div id="patient-table-dropdown" class="hidden absolute bg-white border border-gray-300 shadow-lg rounded-md mt-2 w-48 z-10">
+    <a href="editstudypage.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+      Edit Study
+      <span class="inline-block ml-2">
+        <!-- SVG Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M4.27614 10.5935L11.0375 3.83207L10.0947 2.88926L3.33333 9.65071V10.5935H4.27614ZM4.82843 11.9268H2V9.09837L9.62333 1.47505C9.88373 1.2147 10.3058 1.2147 10.5661 1.47505L12.4518 3.36067C12.7121 3.62101 12.7121 4.04312 12.4518 4.30347L4.82843 11.9268ZM2 13.2602H14V14.5935H2V13.2602Z" fill="#4D4D4D" />
+        </svg>
+      </span>
+    </a>
+    <a href="#" data-bs-toggle="modal" data-bs-target="#deleteStudy" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+      Delete Study
+      <span class="inline-block ml-2">
+        <!-- SVG Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M11.334 4.00016H14.6673V5.3335H13.334V14.0002C13.334 14.3684 13.0355 14.6668 12.6673 14.6668H3.33398C2.9658 14.6668 2.66732 14.3684 2.66732 14.0002V5.3335H1.33398V4.00016H4.66732V2.00016C4.66732 1.63198 4.9658 1.3335 5.33398 1.3335H10.6673C11.0355 1.3335 11.334 1.63198 11.334 2.00016V4.00016ZM12.0007 5.3335H4.00065V13.3335H12.0007V5.3335ZM6.00065 7.3335H7.33398V11.3335H6.00065V7.3335ZM8.66732 7.3335H10.0007V11.3335H8.66732V7.3335ZM6.00065 2.66683V4.00016H10.0007V2.66683H6.00065Z" fill="#4D4D4D" />
+        </svg>
+      </span>
+    </a>
+    <a href="#" data-bs-toggle="modal" data-bs-target="#assignStudy" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+      Assign Study
+      <span class="inline-block ml-2">
+        <!-- SVG Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M10 4.1665V15.8332" stroke="#4D4D4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M4.16602 10H15.8327" stroke="#4D4D4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </span>
+    </a>
+    <a href="#" data-bs-toggle="modal" data-bs-target="#mergePatient" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+      Merge Patient
+      <span class="inline-block ml-2">
+        <!-- SVG Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M13.3327 14.6665H11.9993V13.3332C11.9993 12.2286 11.1039 11.3332 9.99935 11.3332H5.99935C4.89478 11.3332 3.99935 12.2286 3.99935 13.3332V14.6665H2.66602V13.3332C2.66602 11.4922 4.1584 9.99984 5.99935 9.99984H9.99935C11.8403 9.99984 13.3327 11.4922 13.3327 13.3332V14.6665ZM7.99935 8.6665C5.79021 8.6665 3.99935 6.87564 3.99935 4.6665C3.99935 2.45736 5.79021 0.666504 7.99935 0.666504C10.2085 0.666504 11.9993 2.45736 11.9993 4.6665C11.9993 6.87564 10.2085 8.6665 7.99935 8.6665ZM7.99935 7.33317C9.47208 7.33317 10.666 6.13926 10.666 4.6665C10.666 3.19374 9.47208 1.99984 7.99935 1.99984C6.52659 1.99984 5.33268 3.19374 5.33268 4.6665C5.33268 6.13926 6.52659 7.33317 7.99935 7.33317Z" fill="#4D4D4D" />
+        </svg>
+      </span>
+    </a>
+    <a href="#" data-bs-toggle="modal" data-bs-target="#mergePatient" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+      Merge Study from Worklist
+      <span class="inline-block ml-2">
+        <!-- SVG Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M13.3333 14.6668H2.66667C2.29848 14.6668 2 14.3684 2 14.0002V2.00016C2 1.63198 2.29848 1.3335 2.66667 1.3335H13.3333C13.7015 1.3335 14 1.63198 14 2.00016V14.0002C14 14.3684 13.7015 14.6668 13.3333 14.6668ZM12.6667 13.3335V2.66683H3.33333V13.3335H12.6667ZM5.33333 4.66683H10.6667V6.00016H5.33333V4.66683ZM5.33333 7.3335H10.6667V8.66683H5.33333V7.3335ZM5.33333 10.0002H10.6667V11.3335H5.33333V10.0002Z" fill="#4D4D4D" />
+        </svg>
+      </span>
+    </a>
+    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+      Export Study to Excel
+      <span class="inline-block ml-2">
+        <!-- SVG Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M14.6673 2.66667C14.6673 2.29848 14.3689 2 14.0007 2H2.00065C1.63246 2 1.33398 2.29848 1.33398 2.66667V13.3333C1.33398 13.7015 1.63246 14 2.00065 14H14.0007C14.3689 14 14.6673 13.7015 14.6673 13.3333V2.66667ZM2.66732 10H4.94468C5.45905 11.1773 6.63377 12 8.00065 12C9.36752 12 10.5423 11.1773 11.0567 10H13.334V12.6667H2.66732V10ZM2.66732 3.33333H13.334V8.66667H10.0007C10.0007 9.77127 9.10525 10.6667 8.00065 10.6667C6.89605 10.6667 6.00065 9.77127 6.00065 8.66667H2.66732V3.33333ZM10.6673 7.33333H8.66732V9.33333H7.33398V7.33333H5.33398L8.00065 4.33333L10.6673 7.33333Z" fill="#4D4D4D" />
+        </svg>
+      </span>
+    </a>
+    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+      Share Study
+      <span class="inline-block ml-2">
+        <!-- SVG Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <g clip-path="url(#clip0_188_2119)">
+            <path d="M9.99935 4.6665H11.9993C12.4371 4.6665 12.8705 4.75272 13.275 4.92024C13.6794 5.08775 14.0468 5.33329 14.3564 5.64281C14.6659 5.95234 14.9114 6.31981 15.0789 6.72423C15.2465 7.12864 15.3327 7.5621 15.3327 7.99984C15.3327 8.43758 15.2465 8.87103 15.0789 9.27545C14.9114 9.67987 14.6659 10.0473 14.3564 10.3569C14.0468 10.6664 13.6794 10.9119 13.275 11.0794C12.8705 11.247 12.4371 11.3332 11.9993 11.3332H9.99935M5.99935 11.3332H3.99935C3.56161 11.3332 3.12816 11.247 2.72374 11.0794C2.31932 10.9119 1.95186 10.6664 1.64233 10.3569C1.01721 9.73174 0.666016 8.88389 0.666016 7.99984C0.666016 7.11579 1.01721 6.26794 1.64233 5.64281C1.95186 5.33329 2.31932 5.08775 2.72374 4.92024C3.12816 4.75272 3.56161 4.6665 3.99935 4.6665H5.99935" stroke="#4D4D4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </g>
+        </svg>
+      </span>
+    </a>
   </div>
+    </div>
+  </main>
 
-  <!-- JavaScript -->
   <script>
-    const menuBtn = document.getElementById('menu-btn');
-    const closeBtn = document.getElementById('close-btn');
-    const sidebar = document.getElementById('sidebar');
+    // Select the dropdown and button
+const dropdownButton = document.getElementById('dropdown-button');
+const dropdownMenu = document.getElementById('patient-table-dropdown');
 
-    // Toggle sidebar
-    const toggleSidebar = () => {
-      sidebar.classList.toggle('-translate-x-full');
-    };
+// Toggle the visibility of the dropdown menu when the button is clicked
+dropdownButton.addEventListener('click', () => {
+  dropdownMenu.classList.toggle('hidden');
+});
 
-    // Event listeners
-    menuBtn.addEventListener('click', toggleSidebar);
-    closeBtn.addEventListener('click', toggleSidebar);
   </script>
-<!-- JavaScript -->
-<script>
-    // Get modal elements
-    const actionModal = document.getElementById('actionModal');
-    const successModal = document.getElementById('successModal');
-    const saveBtn = document.getElementById('saveBtn');
-    const closeModal = document.getElementById('closeModal');
-    const cancelModal = document.getElementById('cancelModal');
-    const confirmModal = document.getElementById('confirmModal');
-    const closeSuccessModal = document.getElementById('closeSuccessModal');
-    const closeSuccessConfirm = document.getElementById('closeSuccessConfirm');
-
-    // Show the first modal when clicking Save
-    saveBtn.addEventListener('click', () => {
-        actionModal.classList.remove('hidden');
-    });
-
-    // Close the first modal
-    closeModal.addEventListener('click', () => {
-        actionModal.classList.add('hidden');
-    });
-
-    cancelModal.addEventListener('click', () => {
-        actionModal.classList.add('hidden');
-    });
-
-    // Show the second modal after confirming Save
-    confirmModal.addEventListener('click', () => {
-        actionModal.classList.add('hidden');
-        successModal.classList.remove('hidden');
-    });
-
-    // Close the second modal
-    closeSuccessModal.addEventListener('click', () => {
-        successModal.classList.add('hidden');
-    });
-
-    closeSuccessConfirm.addEventListener('click', () => {
-        successModal.classList.add('hidden');
-    });
-</script>
 </body>
 </html>

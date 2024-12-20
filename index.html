@@ -65,7 +65,7 @@
     <main class="flex-1 flex flex-col">
       <!-- Navbar -->
       <header class="bg-white shadow p-4 flex justify-between items-center">
-        <h2 class="text-xl font-semibold text-red-700 animate-bounce">Mita</h2>
+        <h2 class="text-xl font-semibold text-red-700 animate-bounce">M</h2>
         <div class="flex items-center gap-4">
           <!-- Hamburger Menu -->
           <button 
@@ -86,10 +86,31 @@
       </header>
 
       <!-- Content Section -->
-      <section class="flex-1 p-6 bg-gray-100">
-        <div class="bg-white p-6 rounded shadow">
-          <h3 class="text-2xl font-bold">Dashboard Content</h3>
+      <section class="flex-1 p-2 bg-gray-100">
+        <div class="bg-white p-6 rounded shadow mb-6">
+          <h3 class="text-2xl font-bold animate-pulse text-purple-600">
+            You are my Content &#x2665;!
+          </h3>
           <p class="mt-4 text-gray-600">This is where your main content goes.</p>
+        </div>
+      
+        <!-- Chart Section -->
+        <div class="space-y-6">
+          <!-- Reports Chart -->
+          <div class="bg-white p-4 rounded shadow overflow-x-auto">
+            <h4 class="text-lg font-semibold mb-4">Reports Overview</h4>
+            <div class="chart-container" style="height: 300px; min-width: 600px;">
+              <canvas id="reportsChart"></canvas>
+            </div>
+          </div>
+      
+          <!-- Patients Chart -->
+          <div class="bg-white p-4 rounded shadow overflow-x-auto">
+            <h4 class="text-lg font-semibold mb-4">Patients Overview</h4>
+            <div class="chart-container" style="height: 300px; min-width: 600px;">
+              <canvas id="patientsChart"></canvas>
+            </div>
+          </div>
         </div>
       </section>
     </main>
@@ -109,6 +130,75 @@
     // Event listeners
     menuBtn.addEventListener('click', toggleSidebar);
     closeBtn.addEventListener('click', toggleSidebar);
+  </script>
+  <!-- Chart.js Script -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+<script>
+    const ctx1 = document.getElementById("reportsChart").getContext("2d");
+    const ctx2 = document.getElementById("patientsChart").getContext("2d");
+  
+    const reportsChart = new Chart(ctx1, {
+      type: "bar",
+      data: {
+        labels: [
+          "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+        ],
+        datasets: [
+          { label: "Verified", data: [80, 60, 80, 60, 80, 60, 80, 60, 80, 60, 80, 60], backgroundColor: "#4CAF50" },
+          { label: "Partial", data: [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], backgroundColor: "#F44336" },
+          { label: "None", data: [40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40], backgroundColor: "#2196F3" },
+          { label: "Not Verified", data: [60, 80, 60, 80, 60, 80, 60, 80, 60, 80, 60, 80], backgroundColor: "#FFEB3B" },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { maxRotation: 45, minRotation: 45, font: { size: 10 } },
+          },
+          y: {
+            grid: { display: true },
+            beginAtZero: true,
+          },
+        },
+        plugins: {
+          legend: { labels: { font: { size: 10 } } },
+          tooltip: { enabled: true },
+        },
+      },
+    });
+  
+    const patientsChart = new Chart(ctx2, {
+      type: "bar",
+      data: {
+        labels: ["CT", "BMD", "CX", "ST", "CT", "BMD", "CX", "ST"],
+        datasets: [
+          { label: "Patients", data: [100, 80, 60, 40, 80, 60, 80, 40], backgroundColor: "#4CAF50" },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { maxRotation: 45, minRotation: 45, font: { size: 10 } },
+          },
+          y: {
+            grid: { display: true },
+            beginAtZero: true,
+          },
+        },
+        plugins: {
+          legend: { labels: { font: { size: 10 } } },
+          tooltip: { enabled: true },
+        },
+      },
+    });
   </script>
 </body>
 </html>

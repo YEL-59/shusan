@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Optional: Smooth transition for the sidebar */
+    .sidebar-transition {
+      transition: transform 0.3s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <div class="flex h-screen">
+    <!-- Sidebar -->
+    <aside 
+      id="sidebar" 
+      class="fixed inset-y-0 left-0 w-64 bg-blue-800 text-white transform -translate-x-full lg:translate-x-0 sidebar-transition z-50 lg:relative lg:flex lg:flex-col"
+    >
+      <!-- Close Icon (Visible on Tablet and Smaller Screens) -->
+      <div class="p-4 flex items-center justify-between border-b border-blue-700">
+        <h1 class="text-2xl font-bold">My Dashboard</h1>
+        <button 
+          id="close-btn" 
+          class="block lg:hidden text-white focus:outline-none focus:ring focus:ring-blue-300"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Menu Items -->
+      <nav class="flex-1 p-4 space-y-4">
+        <a href="#" class="flex items-center gap-4 p-2 rounded hover:bg-blue-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h11M9 21V3m-6 7h18" />
+          </svg>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="flex items-center gap-4 p-2 rounded hover:bg-blue-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c1.104 0 2-.896 2-2s-.896-2-2-2-2 .896-2 2 .896 2 2 2zm-4 8h8m-4-4v-1c0-2.2 3-3 3-3m-6 0s3 .8 3 3v1" />
+          </svg>
+          <span>Settings</span>
+        </a>
+        <a href="#" class="flex items-center gap-4 p-2 rounded hover:bg-blue-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7" />
+          </svg>
+          <span>Logout</span>
+        </a>
+        <a href="#" class="flex items-center gap-4 p-2 rounded hover:bg-blue-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20l-7-4-7 4V5a2 2 0 012-2h10a2 2 0 012 2z" />
+          </svg>
+          <span>Patient</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col">
+      <!-- Navbar -->
+      <header class="bg-white shadow p-4 flex justify-between items-center">
+        <h2 class="text-xl font-semibold text-red-700 animate-bounce">M</h2>
+        <div class="flex items-center gap-4">
+          <!-- Hamburger Menu -->
+          <button 
+            id="menu-btn" 
+            class="block lg:hidden text-gray-600 focus:outline-none focus:ring focus:ring-blue-300"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+          <input 
+            type="text" 
+            placeholder="Search..." 
+            class="border rounded p-2 focus:outline-none focus:ring focus:ring-blue-300 hidden md:block"
+          />
+          <button class="bg-blue-800 text-white px-4 py-2 rounded hover:bg-blue-700">Profile</button>
+        </div>
+      </header>
+
+      <!-- Content Section -->
+      <section class="flex-1 p-2 bg-gray-100">
+        
+      
+       <!-- Main Content -->
+       <main class=" p-8">
+        <h2 class="text-2xl font-bold mb-4">Patients Table</h2>
+
+        <div class="grid grid-cols-12 gap-8 ">
+            <div class="col-span-4">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center">
+                        <div class="w-24 h-24 rounded-full overflow-hidden mr-4">
+                            <img src="/assets/images/profileedit.png" alt="Profile Picture"
+                                class="w-full h-full object-cover" />
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-semibold">Tanzir Rahman</h2>
+                            <p class="text-gray-600">Gender: Male</p>
+                            <p class="text-gray-600">Age: 30</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md mt-6">
+                    <h2 class="text-xl font-semibold">Assigned Doctor</h2>
+                    <p class="text-gray-600">Dr.Maneer</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md mt-6">
+                    <h2 class="text-xl font-semibold">Notes</h2>
+                    <p class="text-gray-600">Knee Pain, Headache</p>
+                </div>
+            </div>
+
+            <div class="col-span-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <p class="text-xl font-semibold">Patient's Studies</p>
+                    <form class="mt-4">
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="form-group">
+                                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                                <input type="text" id="name" name="name" placeholder="Enter patient's name"
+                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="id" class="block text-sm font-medium text-gray-700">ID</label>
+                                <input type="text" id="id" name="id" placeholder="Enter patient's ID"
+                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-6 mt-4">
+                            <div class="form-group">
+                                <label class="block text-sm font-medium text-gray-700">Gender</label>
+                                <div class="mt-2 flex space-x-4">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="gender" value="male" class="mr-2" required />
+                                        Male
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="gender" value="female" class="mr-2" required />
+                                        Female
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="dob" class="block text-sm font-medium text-gray-700">Date of Birth</label>
+                                <input type="date" id="dob" name="dob"
+                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-6 mt-4">
+                            <div class="form-group">
+                                <label for="cell" class="block text-sm font-medium text-gray-700">Cell Phone</label>
+                                <input type="tel" id="cell" name="cell" placeholder="Enter cell phone number"
+                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="notes" class="block text-sm font-medium text-gray-700">Notes</label>
+                                <textarea id="notes" name="notes" rows="1" placeholder="Enter additional notes"
+                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md mt-8">
+                    <p class="text-xl font-semibold">Study Information</p>
+                    <form class="mt-4">
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="form-group">
+                                <label for="procedure_name" class="block text-sm font-medium text-gray-700">Procedure
+                                    Name</label>
+                                <div class="relative">
+                                    <input type="text" id="procedure_name" name="procedure_name"
+                                        placeholder="Enter procedure name"
+                                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
+                                    <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+                                            <path
+                                                d="M7.9987 14.6668C4.3168 14.6668 1.33203 11.682 1.33203 8.00016C1.33203 4.31826 4.3168 1.3335 7.9987 1.3335C11.6806 1.3335 14.6654 4.31826 14.6654 8.00016C14.6654 11.682 11.6806 14.6668 7.9987 14.6668ZM7.33203 7.3335H4.66536V8.66683H7.33203V11.3335H8.66536V8.66683H11.332V7.3335H8.66536V4.66683H7.33203V7.3335Z"
+                                                fill="#B3B3B3" />
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="study_id" class="block text-sm font-medium text-gray-700">Study ID</label>
+                                <input type="text" id="study_id" name="study_id" placeholder="Enter patient's ID"
+                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-6 mt-4">
+                            <div class="form-group">
+                                <label for="study_description" class="block text-sm font-medium text-gray-700">Study
+                                    Description</label>
+                                <textarea id="study_description" name="study_description" rows="1"
+                                    placeholder="Enter study description"
+                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="study_date" class="block text-sm font-medium text-gray-700">Study
+                                    Date</label>
+                                <input type="date" id="study_date" name="study_date"
+                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-6 mt-4">
+                            <div class="form-group">
+                                <label for="ref_physician" class="block text-sm font-medium text-gray-700">Ref.
+                                    Physician</label>
+                                <input type="text" id="ref_physician" name="ref_physician"
+                                    placeholder="Enter referring physician"
+                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="radiologist"
+                                    class="block text-sm font-medium text-gray-700">Radiologist</label>
+                                <input type="text" id="radiologist" name="radiologist"
+                                    placeholder="Enter radiologist name"
+                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-6 mt-4">
+                            <div class="form-group">
+                                <label for="radiologist_group"
+                                    class="block text-sm font-medium text-gray-700">Radiologist Group</label>
+                                <select id="radiologist_group" name="radiologist_group"
+                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
+                                    <option value="">Select Group</option>
+                                    <option value="group1">Group 1</option>
+                                    <option value="group2">Group 2</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="comment" class="block text-sm font-medium text-gray-700">Comment</label>
+                                <textarea id="comment" name="comment" rows="1" placeholder="Enter additional notes"
+                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-6 mt-4">
+                            <div class="form-group">
+                                <label for="institution_name"
+                                    class="block text-sm font-medium text-gray-700">Institution Name</label>
+                                <select id="institution_name" name="institution_name"
+                                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
+                                    <option value="">Select Institution</option>
+                                    <option value="institution1">Institution 1</option>
+                                    <option value="institution2">Institution 2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <!-- Button Container -->
+                <div class="flex space-x-4 mt-5 justify-end">
+                    <button id="saveBtn"
+                        class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                        Save
+                    </button>
+                    <button
+                        class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400">
+                        Close
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- First Modal (Save Changes) -->
+        <div id="actionModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+            <div class="bg-white rounded-lg shadow-lg w-96 p-6">
+                <div class="flex justify-between items-center">
+                    <button id="closeModal" class="text-gray-600 hover:text-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
+                            <path d="M15 9L9 15" stroke="#666" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M9 9L15 15" stroke="#666" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="text-center ">
+                    <h2 class="text-xl font-semibold">Save Changes?</h2>
+                    <p class="text-gray-600">Are you sure you want to save these changes?</p>
+                    <div class="mt-4 flex justify-center space-x-4">
+                        <button id="cancelModal" class="bg-gray-300 text-gray-700 py-2 px-4 rounded hover:bg-gray-400">
+                            Cancel
+                        </button>
+                        <button id="confirmModal" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Modal (Success) -->
+        <div id="successModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+            <div class="bg-white rounded-lg shadow-lg w-96 p-6">
+                <div class="flex justify-between items-center">
+                    <button id="closeSuccessModal" class="text-gray-600 hover:text-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
+                            <path d="M15 9L9 15" stroke="#666" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M9 9L15 15" stroke="#666" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" class="mx-auto mb-4">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M15 27.5C21.9036 27.5 27.5 21.9036 27.5 15C27.5 8.09644 21.9036 2.5 15 2.5C8.09644 2.5 2.5 8.09644 2.5 15C2.5 21.9036 8.09644 27.5 15 27.5ZM20.9603 12.0502C21.4022 11.5199 21.3306 10.7317 20.8002 10.2897C20.2699 9.84776 19.4817 9.91942 19.0397 10.4498L13.666 16.8982L10.8839 14.1161C10.3957 13.628 9.60427 13.628 9.11612 14.1161C8.62796 14.6043 8.62796 15.3957 9.11612 15.8839L12.6241 19.3919C13.2738 20.0416 14.3411 19.9932 14.9293 19.2873L20.9603 12.0502Z"
+                            fill="#17AF17" />
+                    </svg>
+                    <h2 class="text-xl font-semibold">Saved!</h2>
+                    <p class="text-gray-600">You have successfully saved all new changes.</p>
+                    <div class="mt-4 flex justify-center">
+                        <button id="closeSuccessConfirm"
+                            class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                            OK
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        </div>
+    </main>
+      </section>
+    </main>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const closeBtn = document.getElementById('close-btn');
+    const sidebar = document.getElementById('sidebar');
+
+    // Toggle sidebar
+    const toggleSidebar = () => {
+      sidebar.classList.toggle('-translate-x-full');
+    };
+
+    // Event listeners
+    menuBtn.addEventListener('click', toggleSidebar);
+    closeBtn.addEventListener('click', toggleSidebar);
+  </script>
+<!-- JavaScript -->
+<script>
+    // Get modal elements
+    const actionModal = document.getElementById('actionModal');
+    const successModal = document.getElementById('successModal');
+    const saveBtn = document.getElementById('saveBtn');
+    const closeModal = document.getElementById('closeModal');
+    const cancelModal = document.getElementById('cancelModal');
+    const confirmModal = document.getElementById('confirmModal');
+    const closeSuccessModal = document.getElementById('closeSuccessModal');
+    const closeSuccessConfirm = document.getElementById('closeSuccessConfirm');
+
+    // Show the first modal when clicking Save
+    saveBtn.addEventListener('click', () => {
+        actionModal.classList.remove('hidden');
+    });
+
+    // Close the first modal
+    closeModal.addEventListener('click', () => {
+        actionModal.classList.add('hidden');
+    });
+
+    cancelModal.addEventListener('click', () => {
+        actionModal.classList.add('hidden');
+    });
+
+    // Show the second modal after confirming Save
+    confirmModal.addEventListener('click', () => {
+        actionModal.classList.add('hidden');
+        successModal.classList.remove('hidden');
+    });
+
+    // Close the second modal
+    closeSuccessModal.addEventListener('click', () => {
+        successModal.classList.add('hidden');
+    });
+
+    closeSuccessConfirm.addEventListener('click', () => {
+        successModal.classList.add('hidden');
+    });
+</script>
+</body>
+</html>
